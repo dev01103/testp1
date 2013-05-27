@@ -36,8 +36,12 @@ class template:
  
  
  
- def getFile(self,fn):
-   tplpath=self.tplpath+fn
+ def getFile(self,fn,path=None):
+   if path==None:
+    tplpath=self.tplpath+fn
+   else:
+    tplpath=path+fn
+   # print tplpath
    try:
     f=open(tplpath)
     tmp_code=f.read()
