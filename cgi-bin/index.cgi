@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import cgitb
-import mainframelib.mainframe
+from mainframelib.mainframe import *
 
-main=mainframelib.mainframe.mainframe()
+main=mainframe.getMe()
 
 
