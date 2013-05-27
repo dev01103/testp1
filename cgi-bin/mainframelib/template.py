@@ -20,7 +20,14 @@ class template:
      self.code
      
   def getPositions(self):
-    pass
+    p=re.findall(r'{{.*}}',self.code)
+    ret=p
+    i=0
+    for x in p:
+	ret[i]=re.sub(r'[{{}}]','',x)
+	i=i+1
+    return ret
+      
   
   def parse(self):
    newcode=self.code

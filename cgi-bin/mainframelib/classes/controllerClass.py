@@ -8,6 +8,9 @@ class controllerClass(object):
     self.params=cgi.FieldStorage()
     self.view=''
   
+  def setModel(self,m):
+    self.model=m
+  
   def parseRequest(self):
    if self.params.getvalue('view')<>None:
       self.view=self.params.getvalue('view')

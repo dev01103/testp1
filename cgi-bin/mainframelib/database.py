@@ -46,6 +46,18 @@ class databaseConn:
  def getResults(self):
    return self.dbo.getResults()
    
+ def q(self,s):
+   return '"'+s+'"'
+ 
+ def qj(self,a):
+  newa=a
+  i=0
+  for x in a:
+     x=self.q(x)
+     newa[i]=x
+     i=i+1
+     
+  return ','.join(newa)
  
  def query(self,q):
       self.dbo.query(q)
