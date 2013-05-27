@@ -1,4 +1,36 @@
 import re
+import sys
+
+class template:
+  def __init__(self,path):
+    self.path=path
+    self.varArray=dict()
+    
+  def setVar(self,name,value):
+   self.varArray[name]=value
+   
+  def getFile(self,fn):
+   try:
+    f=open(self.path+'/'+fn)
+    self.code=f.read()
+   except IOError:
+     print self.path+'/'+fn
+     sys.exit('ERROR')
+   else:
+     self.code
+     
+  def getPositions(self):
+    pass
+  
+  def parse(self):
+   newcode=self.code
+   for k in self.varArray:
+     newcode=re.sub(r'{{'+k+'}}',self.varArray[k],newcode)
+   return newcode
+  
+  
+  
+'''
 
 class template:
  def __init__(self):
@@ -61,3 +93,4 @@ class template:
 	self.process('main.tpl')
     else:
      print self.parseMain(tmp_code)
+     '''

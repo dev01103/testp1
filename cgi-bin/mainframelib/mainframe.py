@@ -2,8 +2,9 @@
 import cgitb
 import cgi
 cgitb.enable()
+
 from template import *
-import mainController
+from mainController import *
 from database import *
 import parts
 from parts import frontpage
@@ -27,16 +28,19 @@ class mainframe:
     self.db=databaseConn.getMe()
     self.db.query('select name from pyshop_templates as t where t.default=1 and type=\'FE\'')
     res=self.db.getResults()
+    # print res
+    return res[0]['name']
     
+  
   
   def __init__(self):
    print "Content-Type: text/html\n\n"
    self.getTemplate()
-   self.controller=mainController.mainController()
+   self.controller=mainController()
    self.controller.parseRequest()
-   self.template=template()
-   self.template.setVar('test','666');
-   self.controller.proceed(self.template)
+   tmpl=self.getTemplate()
+
+   self.controller.proceed(tmpl)
   
    
   
