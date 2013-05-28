@@ -5,12 +5,17 @@ class template:
   def __init__(self,path):
     self.path=path
     self.varArray=dict()
+    self.name=None
     
   def setVar(self,name,value):
    self.varArray[name]=value
    
+  def getSubtemplate(self,path):
+    return template(self.path+'/'+path)
+  
   def getFile(self,fn):
    try:
+    name=self.path+'/'+fn
     f=open(self.path+'/'+fn)
     self.code=f.read()
    except IOError:
@@ -18,6 +23,7 @@ class template:
      sys.exit('ERROR')
    else:
      self.code
+     
      
   def getPositions(self):
     p=re.findall(r'{{.*}}',self.code)

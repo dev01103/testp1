@@ -1,9 +1,8 @@
 <body>
 <table border="1">
+<tr><td colspan="2">{{debug}}</td></tr>
 <tr>
-<td>{{leftpart}}</td>
 <td>{{centerpart}}</td>
-<td>{{rightpart}}</td>
 </tr>
 
 </table>

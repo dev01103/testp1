@@ -1,4 +1,4 @@
-class modelClass:
+class modelClass(object):
   def __init__(self):
     pass
   

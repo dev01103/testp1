@@ -1,0 +1,3 @@
+Solve param-dependant parts (like depending on used view or action)
+Import directly in parent classes
+More than one part in one position
