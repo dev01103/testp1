@@ -52,6 +52,11 @@ class mainframe:
       res=db.getResults()
       return res
   
+  def logUser(self,user,psw): #concept is that even unlogged user is logged as guest
+    db=databaseConn.getMe()
+    query="select * from pyshop_users where user_name="+db.q(user);
+    
+  
   
   def go(self):
    print "Content-Type: text/html\n\n"
