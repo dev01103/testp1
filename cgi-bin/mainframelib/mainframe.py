@@ -13,6 +13,7 @@ from mainModel import *
 import sys
 from output import *
 
+
 class mainframe:
   me=None
   counter=0
@@ -52,7 +53,12 @@ class mainframe:
       res=db.getResults()
       return res
   
-  def logUser(self,user,psw): #concept is that even unlogged user is logged as guest
+  def logUser(self,user=None,psw=None): #concept is that even unlogged user is logged as guest
+    if user==None:
+      #guest login routines
+      pass
+    else:
+      pass
     db=databaseConn.getMe()
     query="select * from pyshop_users where user_name="+db.q(user);
     
@@ -64,7 +70,7 @@ class mainframe:
    self.model=mainModel()
    tpl=self.getTemplate()
    tmpl=template('templates/'+tpl)
-   self.controller=mainController(tmpl)
+   self.controller=mainController(tmpl,'')
    self.controller.setModel(self.model)
    self.controller.parseRequest()
    self.controller.proceed()

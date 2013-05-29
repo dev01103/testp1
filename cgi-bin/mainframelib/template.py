@@ -6,7 +6,11 @@ class template:
     self.path=path
     self.varArray=dict()
     self.name=None
+    self.hide=False
     
+  def hideUnused(self,yes):
+    self.hide=yes
+  
   def setVar(self,name,value):
    self.varArray[name]=value
    
@@ -39,6 +43,8 @@ class template:
    newcode=self.code
    for k in self.varArray:
      newcode=re.sub(r'{{'+k+'}}',self.varArray[k],newcode)
+   if self.hide==True:
+     newcode=re.sub(r'{{.*}}','',newcode)
    return newcode
   
   

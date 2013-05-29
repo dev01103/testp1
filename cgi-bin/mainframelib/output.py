@@ -25,7 +25,6 @@ class output:
     self.unlockPrint()
     print(todo)
     self.lockPrint()
-    
   def code(self,delimiters):
    pass  
   #def html(self):
