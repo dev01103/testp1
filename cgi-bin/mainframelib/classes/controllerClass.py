@@ -10,6 +10,7 @@ from runpy import *
 from mainframelib.database import *
 
 
+
 class controllerClass(object):
   
   def getAcl(self):
@@ -28,6 +29,8 @@ class controllerClass(object):
     self.name=name
     self.allowed=True
     self.allowed_children=True
+    self.actions={}
+    self.addAction('default',self.defaultAction)
     
     
   def loadPart(self,name):
@@ -74,10 +77,19 @@ class controllerClass(object):
   def getAction(self):
     return self.action
   
+  def defaultAction(self):
+    pass
+  
+  def addAction(self,name,function):
+    self.actions[name]=function
+    
+  
+  
   def startAction(self):
    act=self.getAction()
-   if act<>'' and act<>None:
-     exec "self."+act+"()"
+   if act=='' or act==None:
+     act='default'
+   self.actions[act]()
    
   
   def prepare(self): #custom preparations done in parts

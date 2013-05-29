@@ -7,15 +7,28 @@ class template:
     self.varArray=dict()
     self.name=None
     self.hide=False
+    self.decorator=None
+    #self.iteratedDecorator.getCode(
     
   def hideUnused(self,yes):
     self.hide=yes
+  
+  
+  
+  def setVarHref(self,name,link):
+    pass
+  
+  def setVarIterated(self,name,arr):
+    pass
   
   def setVar(self,name,value):
    self.varArray[name]=value
    
   def getSubtemplate(self,path):
     return template(self.path+'/'+path)
+  
+  def getCode(self,code):
+    self.code=code
   
   def getFile(self,fn):
    try:
