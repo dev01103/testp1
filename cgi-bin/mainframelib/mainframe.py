@@ -11,7 +11,7 @@ from parts import frontpage
 import config
 from mainModel import *
 import sys
-
+from output import *
 
 class mainframe:
   me=None
@@ -60,14 +60,13 @@ class mainframe:
   
   def go(self):
    print "Content-Type: text/html\n\n"
-   
+   o=output.getMe()
    self.model=mainModel()
    tpl=self.getTemplate()
    tmpl=template('templates/'+tpl)
    self.controller=mainController(tmpl)
    self.controller.setModel(self.model)
    self.controller.parseRequest()
-  
    self.controller.proceed()
    self.controller.display()
   

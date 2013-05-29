@@ -4,6 +4,7 @@ from template import *
 import importlib
 import sys
 import copy
+from output import *
 
 class mainController(classes.controllerClass.controllerClass):
   
@@ -11,7 +12,8 @@ class mainController(classes.controllerClass.controllerClass):
   
      
   def display(self):
-    print self.main_code
+    o=output.getMe()
+    o.o(self.main_code)
   
   def proceed(self):
     self.head=copy.deepcopy(self.tmpl)
