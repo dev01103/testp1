@@ -18,16 +18,19 @@ USE `pyshop`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `pyshop_users_acl`
+-- Table structure for table `pyshop_templates`
 --
 
-DROP TABLE IF EXISTS `pyshop_users_acl`;
+DROP TABLE IF EXISTS `pyshop_templates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pyshop_users_acl` (
-  `usr_acl_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`usr_acl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `pyshop_templates` (
+  `template_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `type` enum('FE','BE') DEFAULT NULL,
+  `default` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`template_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,6 +52,21 @@ CREATE TABLE `pyshop_parts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `pyshop_user_group`
+--
+
+DROP TABLE IF EXISTS `pyshop_user_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pyshop_user_group` (
+  `ug_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(45) NOT NULL,
+  `group_id` varchar(45) NOT NULL,
+  PRIMARY KEY (`ug_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `pyshop_parts_acl`
 --
 
@@ -58,10 +76,10 @@ DROP TABLE IF EXISTS `pyshop_parts_acl`;
 CREATE TABLE `pyshop_parts_acl` (
   `acl_id` int(11) NOT NULL AUTO_INCREMENT,
   `part_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `privilege` enum('view','edit') DEFAULT NULL COMMENT 'specific to part hmmm...',
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`acl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,18 +100,16 @@ CREATE TABLE `pyshop_users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `pyshop_templates`
+-- Table structure for table `pythop_groups`
 --
 
-DROP TABLE IF EXISTS `pyshop_templates`;
+DROP TABLE IF EXISTS `pythop_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pyshop_templates` (
-  `template_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pythop_groups` (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `type` enum('FE','BE') DEFAULT NULL,
-  `default` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`template_id`)
+  PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -106,4 +122,4 @@ CREATE TABLE `pyshop_templates` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-28 21:21:57
+-- Dump completed on 2013-05-29 18:53:14
