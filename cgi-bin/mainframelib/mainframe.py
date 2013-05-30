@@ -32,10 +32,12 @@ class mainframe:
    return mainframe.me
   
   def getTemplate(self):
-      db=databaseConn.getMe()
-      db.query('select name from pyshop_templates as t where t.default=1 and type=\'FE\'')
-      res=db.getResults()
-      return res[0]['name']
+      if self.templatename==None:
+	db=databaseConn.getMe()
+	db.query('select name from pyshop_templates as t where t.default=1 and type=\'FE\'')
+	res=db.getResults()
+	self.templatename=res[0]['name']
+      return self.templatename
     
   def getAllPartsPos(self,positions):
       if len(positions)>0 and positions<>None:
@@ -78,6 +80,7 @@ class mainframe:
   
   def __init__(self):
     mainframe.counter=mainframe.counter+1
+    self.templatename=None
    
    
   

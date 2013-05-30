@@ -1,24 +1,39 @@
 import re
 import sys
 
-class template:
+
+
+class template(object):
   def __init__(self,path):
     self.path=path
     self.varArray=dict()
     self.name=None
     self.hide=False
     self.decorator=None
+    self.sorrounding=None
     #self.iteratedDecorator.getCode(
     
   def hideUnused(self,yes):
     self.hide=yes
   
   
+ 
   
-  def setVarHref(self,name,link):
+  def setDecorator(self,tmpl,sorrounding=None):
+    self.decorator=tmpl
+    self.sorrounding=sorrounding
+  
+  def setVarDSingle(self,name,v):
+    for dk in v:
+      self.decorator.setVar(dk,v[dk])
+    parsed=self.decorator.parse()
+    self.setVar(name,parsed)
+    
+  
+  def setVarDV(self,name):
     pass
   
-  def setVarIterated(self,name,arr):
+  def setVarDIterated(self,name,arr):
     pass
   
   def setVar(self,name,value):
