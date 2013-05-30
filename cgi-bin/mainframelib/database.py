@@ -43,7 +43,14 @@ class databaseConn:
  def setFormat(self,res_format):
    self.res_format=res_format
  
- def getResults(self):
+ def countResults(self):
+   res=self.dbo.getResults()
+   if res<>None:
+     return len(res)
+   else:
+    return 0
+ 
+ def getResults(self): #TODO: optimize for getting results only once
    return self.dbo.getResults()
    
  def q(self,s):
