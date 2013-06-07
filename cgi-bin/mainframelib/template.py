@@ -23,17 +23,15 @@ class template(object):
     self.decorator=tmpl
     self.sorrounding=sorrounding
   
-  def setVarDSingle(self,name,v):
+  def setVarSingle(self,name,v,decor=None):
+    if decor==None:
+      decor=self.decorator
     for dk in v:
-      self.decorator.setVar(dk,v[dk])
-    parsed=self.decorator.parse()
+      decor.setVar(dk,v[dk])
+    parsed=decor.parse()
     self.setVar(name,parsed)
     
-  
-  def setVarDV(self,name):
-    pass
-  
-  def setVarDIterated(self,name,arr):
+  def setVarIterated1D(self,name,arr):
     pass
   
   def setVar(self,name,value):
@@ -65,12 +63,22 @@ class template(object):
 	ret[i]=re.sub(r'[{{}}]','',x)
 	i=i+1
     return ret
-      
+     
+  def parseIter(self,it,i):
+    self.t=template('')
   
   def parse(self):
    newcode=self.code
+   for i in self.varArray:
+     it=re.findall(r'{{iterate=.*as.*}}.*{{/iterate}}',self.code,re.MULTILINE|re.DOTALL)
+     self.parseIter(it,i)
+   
    for k in self.varArray:
      newcode=re.sub(r'{{'+k+'}}',self.varArray[k],newcode)
+    
+     #if len(p)>0:
+       
+   
    if self.hide==True:
      newcode=re.sub(r'{{.*}}','',newcode)
    return newcode

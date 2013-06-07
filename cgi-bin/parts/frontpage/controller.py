@@ -5,7 +5,9 @@ class controller(controllerClass):
   def defaultAction(self):
     
     self.tmpl.decorator=decorator('href')
-    self.tmpl.setVarDSingle('var',{'text':'wp','href':'http://wp.pl'})
+    self.tmpl.setVar('testit',('a','b','c'))
+    self.tmpl.setVarSingle('var',{'text':'wp','href':'http://wp.pl'})
+    self.tmpl.setVarSingle('heading',{'text':'Pyshop frontpage'},decorator('heading'))
     
   
   def prepare(self):
