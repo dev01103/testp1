@@ -1,5 +1,6 @@
 import re
 import sys
+import copy
 
 
 
@@ -65,7 +66,17 @@ class template(object):
     return ret
      
   def parseDict(self,code,dic):
-    pass
+    key=copy.deepcopy(code)
+    key=re.sub(r'{{.*\.',r'',key,re.DOTALL)
+    key=re.sub(r'}}',r'',key,re.DOTALL)
+    key=re.sub(r'\s',r'',key)
+    
+    for k in dic:
+      code=re.sub(r'{{.*\..*'+k+'.*}}',str(dic[k]),code)
+    return code
+    
+    
+    
   
   def parseIter(self,code,varname,var):
     t=template('')
@@ -79,14 +90,9 @@ class template(object):
     html=''
     n=0
     for v in var:
-      
       t.code=insides
-      t.setVar(itas,v)
-      
+      t.setVar(itas,self.parseDict(insides,v))
       html=html+t.parse()
-      
-    
-    
     return html
     
     
