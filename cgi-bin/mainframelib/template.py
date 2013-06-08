@@ -62,9 +62,7 @@ class template(object):
     return ret
      
   def parseDict(self,code,dic,inside):
-    print code
     key=code
-    #print key+'|'
     key=re.sub(r'{{.*\.',r'',key)
     key=re.sub(r'}}',r'',key)
     key=re.sub(r'\s',r'',key)
@@ -82,28 +80,28 @@ class template(object):
   
   def parseIter(self,code,varname,var):
     t=template('')
-    t.code=code
     itas=re.search(r'as.*}}',code)
     itas=itas.group(0)
     itas=re.sub(r'as ','',itas)
     itas=re.sub(r'}}','',itas)
     
-    insides=re.sub(r'{{iterate=.*}}','',code)
-    insides=re.sub(r'{{/iterate.*}}','',insides)
-    print insides
+    insides=re.sub(r'^{{iterate=.*}}','',code)
+    insides=re.sub(r'{{/iterate.*}}$','',insides)
+    #print insides
     html=''
     n=0
     for v in var:
       t.code=insides
       if(type(v)==type({'x':'y'})):
        (n,v)=self.parseDict(t.code,v,itas)
-       #print v,n,'END'
-       
        t.code=v
-       #print v
       else:
        t.setVar(itas,v)
-      html=html+t.parse()
+      
+      html=html+t.parse() 
+      
+      
+    
     return html
     
     
@@ -118,11 +116,10 @@ class template(object):
       for it in iterables: 
        parsed=self.parseIter(it,i,self.varArray[i])
        newcode=re.sub(it,parsed,newcode)
-      
-     try:
-      newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
-     except:
-       pass 
+      try:
+       newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
+      except:
+       pass
    
    if self.hide==True:
      newcode=re.sub(r'{{.*}}','',newcode)
