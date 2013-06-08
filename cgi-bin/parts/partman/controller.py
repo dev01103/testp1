@@ -4,6 +4,9 @@ class controller(controllerClass):
   
   def listParts(self):
     allparts=self.model.getAllParts()
+    print allparts
+    
+    self.tmpl.setVar('parts',allparts)
     
   
   def editParts(self):
@@ -14,5 +17,5 @@ class controller(controllerClass):
   
   
   def prepare(self):
-    self.tmpl.hideUnused(True)
+    #self.tmpl.hideUnused(True)
     self.startAction()

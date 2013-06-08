@@ -64,6 +64,9 @@ class template(object):
 	i=i+1
     return ret
      
+  def parseDict(self,code,dic):
+    pass
+  
   def parseIter(self,code,varname,var):
     t=template('')
     t.code=code
@@ -76,8 +79,10 @@ class template(object):
     html=''
     n=0
     for v in var:
+      
       t.code=insides
       t.setVar(itas,v)
+      
       html=html+t.parse()
       
     
@@ -92,12 +97,17 @@ class template(object):
    for i in self.varArray:
      regex=r'{{iterate='+i+' as.*}}.*{{/iterate}}'
      iterables=re.findall(regex,self.code,re.MULTILINE|re.DOTALL)
-     for it in iterables: 
-      parsed=self.parseIter(it,i,self.varArray[i])
-      newcode=re.sub(it,parsed,newcode)
-   
-   for k in self.varArray:
-     newcode=re.sub(r'{{'+k+'}}',self.varArray[k],newcode)
+     if iterables<>None:
+      for it in iterables: 
+       parsed=self.parseIter(it,i,self.varArray[i])
+       newcode=re.sub(it,parsed,newcode)
+      
+     try:
+      newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
+     except:
+       pass
+   #for k in self.varArray:
+   #  
     
      #if len(p)>0:
        

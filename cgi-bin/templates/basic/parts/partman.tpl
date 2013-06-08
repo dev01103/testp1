@@ -1,8 +1,8 @@
 <table border="1">
+{{iterate=parts as part}}
 <tr>
- <td>{{partman_toolbar}}</td>
+ <td>{{part.name}}</td> 
 </tr>
-<tr>
- <td>{{partman_content}}</td>
-</tr>
+{{/iterate}}
+
 </table>
