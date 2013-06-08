@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import cgitb
 import cgi
+import timeit
 cgitb.enable()
 
 from template import *
@@ -65,7 +66,6 @@ class mainframe:
     query="select * from pyshop_users where user_name="+db.q(user);
     
   
-  
   def go(self):
    print "Content-Type: text/html\n\n"
    o=output.getMe()
@@ -77,6 +77,7 @@ class mainframe:
    self.controller.parseRequest()
    self.controller.proceed()
    self.controller.display()
+   
   
   def __init__(self):
     mainframe.counter=mainframe.counter+1

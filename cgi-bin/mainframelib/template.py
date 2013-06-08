@@ -12,13 +12,9 @@ class template(object):
     self.hide=False
     self.decorator=None
     self.sorrounding=None
-    #self.iteratedDecorator.getCode(
     
   def hideUnused(self,yes):
     self.hide=yes
-  
-  
- 
   
   def setDecorator(self,tmpl,sorrounding=None):
     self.decorator=tmpl
@@ -65,16 +61,21 @@ class template(object):
 	i=i+1
     return ret
      
-  def parseDict(self,code,dic):
-   
+  def parseDict(self,code,dic,inside):
+    print code
     key=code
-    key=re.sub(r'{{.*\.',r'',key,re.DOTALL)
-    key=re.sub(r'}}',r'',key,re.DOTALL)
+    #print key+'|'
+    key=re.sub(r'{{.*\.',r'',key)
+    key=re.sub(r'}}',r'',key)
     key=re.sub(r'\s',r'',key)
-    
+    t=template('')
+    t.code=code
     for k in dic:
-      code=re.sub(r'{{.*\..*'+k+'.*}}',str(dic[k]),code)
-    return (key,code)
+      t.setVar(inside+'.'+k,str(dic[k]))
+      
+      
+    t.code=t.parse()  
+    return (key,t.code)
     
     
     
@@ -86,16 +87,20 @@ class template(object):
     itas=itas.group(0)
     itas=re.sub(r'as ','',itas)
     itas=re.sub(r'}}','',itas)
-    insides=re.sub(r'^{{.*}}','',code)
-    insides=re.sub(r'{{.*}}$','',insides)
+    
+    insides=re.sub(r'{{iterate=.*}}','',code)
+    insides=re.sub(r'{{/iterate.*}}','',insides)
+    print insides
     html=''
     n=0
     for v in var:
       t.code=insides
       if(type(v)==type({'x':'y'})):
-       (n,v)=self.parseDict(t.code,v)
-       itas=itas+'.'+n
+       (n,v)=self.parseDict(t.code,v,itas)
+       #print v,n,'END'
+       
        t.code=v
+       #print v
       else:
        t.setVar(itas,v)
       html=html+t.parse()
@@ -117,80 +122,11 @@ class template(object):
      try:
       newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
      except:
-       pass
-   #for k in self.varArray:
-   #  
-    
-     #if len(p)>0:
-       
+       pass 
    
    if self.hide==True:
      newcode=re.sub(r'{{.*}}','',newcode)
    return newcode
   
   
-  
-'''
-
-class template:
- def __init__(self):
-   self.tplpath='templates/basic/'
-   self.varArray=dict()
-   self.title=''
-   
-   
- def getHead(self):
-   return "<head>"\
-   +"\n<title>"\
-   +self.title\
-   +"\n</title>\n"\
-   +"</head>"
  
- def setVar(self,name,value):
-   self.varArray[name]=value
-  
- def setTitle(self,title):
-   self.title=title
-   
-   
- def parse(self,code):
-   newcode=code
-   for k in self.varArray:
-     newcode=re.sub(r'{{'+k+'}}',self.varArray[k],newcode)
-   return newcode
- 
- def parseMain(self,code):
-   newcode=code
-   newcode=re.sub(r'{{head}}',self.getHead(),newcode) #to be done with setVar
-   newcode=re.sub(r'{{body}}',self.body_code,newcode,re.MULTILINE | re.DOTALL)
-   newcode=self.parse(newcode)
-   return newcode
- 
- 
- 
- def getFile(self,fn,path=None):
-   if path==None:
-    tplpath=self.tplpath+fn
-   else:
-    tplpath=path+fn
-   # print tplpath
-   try:
-    f=open(tplpath)
-    tmp_code=f.read()
-   except IOError:
-     return False
-   else:
-     return tmp_code
-     
- def process(self,filename='main.tpl'):
-    tmp_code=self.getFile('index.tpl')
-    self.body_code=self.getFile(filename)
-    if self.body_code==False:
-      if filename=="main.tpl":
-       print "Template error!"
-       quit()
-      else:
-	self.process('main.tpl')
-    else:
-     print self.parseMain(tmp_code)
-     '''

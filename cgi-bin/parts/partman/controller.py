@@ -5,7 +5,6 @@ class controller(controllerClass):
   def listParts(self):
     allparts=self.model.getAllParts()
     #print allparts
-    
     self.tmpl.setVar('parts',allparts)
     
   
