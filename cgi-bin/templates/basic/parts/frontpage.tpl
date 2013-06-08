@@ -1,13 +1,13 @@
 {{heading}}
 {{var}}
 <ul>
-{{iterate=testit as i}}
+{{iterate=testit as iter}}
  <li>
- <ul>
-  {{iterate=i as x}}
-  <li>{{x}}</li>
-  {{/iterate}}
- </ul>
+  <ol>
+    {{iterate=iter as i}}
+     <li>{{i}}</li>
+    {{/iterate}}
+  </ol>
  </li>
 {{/iterate}}
 </ul>

@@ -64,14 +64,37 @@ class template(object):
 	i=i+1
     return ret
      
-  def parseIter(self,it,i):
-    self.t=template('')
+  def parseIter(self,code,varname,var):
+    t=template('')
+    t.code=code
+    itas=re.search(r'as.*}}',code)
+    itas=itas.group(0)
+    itas=re.sub(r'as ','',itas)
+    itas=re.sub(r'}}','',itas)
+    insides=re.sub(r'^{{.*}}','',code)
+    insides=re.sub(r'{{.*}}$','',insides)
+    html=''
+    n=0
+    for v in var:
+      t.code=insides
+      t.setVar(itas,v)
+      html=html+t.parse()
+      
+    
+    
+    return html
+    
+    
+    
   
   def parse(self):
    newcode=self.code
    for i in self.varArray:
-     it=re.findall(r'{{iterate=.*as.*}}.*{{/iterate}}',self.code,re.MULTILINE|re.DOTALL)
-     self.parseIter(it,i)
+     regex=r'{{iterate='+i+' as.*}}.*{{/iterate}}'
+     iterables=re.findall(regex,self.code,re.MULTILINE|re.DOTALL)
+     for it in iterables: 
+      parsed=self.parseIter(it,i,self.varArray[i])
+      newcode=re.sub(it,parsed,newcode)
    
    for k in self.varArray:
      newcode=re.sub(r'{{'+k+'}}',self.varArray[k],newcode)
