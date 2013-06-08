@@ -66,14 +66,15 @@ class template(object):
     return ret
      
   def parseDict(self,code,dic):
-    key=copy.deepcopy(code)
+   
+    key=code
     key=re.sub(r'{{.*\.',r'',key,re.DOTALL)
     key=re.sub(r'}}',r'',key,re.DOTALL)
     key=re.sub(r'\s',r'',key)
     
     for k in dic:
       code=re.sub(r'{{.*\..*'+k+'.*}}',str(dic[k]),code)
-    return code
+    return (key,code)
     
     
     
@@ -91,7 +92,12 @@ class template(object):
     n=0
     for v in var:
       t.code=insides
-      t.setVar(itas,self.parseDict(insides,v))
+      if(type(v)==type({'x':'y'})):
+       (n,v)=self.parseDict(t.code,v)
+       itas=itas+'.'+n
+       t.code=v
+      else:
+       t.setVar(itas,v)
       html=html+t.parse()
     return html
     
