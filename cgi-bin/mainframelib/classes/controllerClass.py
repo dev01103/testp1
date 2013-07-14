@@ -36,7 +36,9 @@ class controllerClass(object):
   def loadPart(self,name):
     
      part_model=importlib.import_module('parts.'+name+'.model').model()
-     part_template=self.tmpl.getSubtemplate('/parts/')
+
+     part_template=self.tmpl.getSubtemplate()
+    
      part_template.getFile(name+'.tpl')
      part_controller=importlib.import_module('parts.'+name+'.controller').controller(part_template,name)
      self.allowed_children=self.allowed_children & part_controller.isAllowed()
@@ -96,8 +98,8 @@ class controllerClass(object):
     pass
   
   def proceed(self):
-    if self.getAcl()==False:
-      return 'NO!'
+    #if self.getAcl()==False:
+    #  return 'NO!'
      
     self.parseRequest()
     positions=self.tmpl.getPositions()

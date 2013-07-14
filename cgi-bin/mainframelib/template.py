@@ -7,6 +7,7 @@ import copy
 class template(object):
   def __init__(self,path):
     self.path=path
+    self.tplpath=path
     self.varArray=dict()
     self.name=None
     self.hide=False
@@ -34,8 +35,12 @@ class template(object):
   def setVar(self,name,value):
    self.varArray[name]=value
    
-  def getSubtemplate(self,path):
-    return template(self.path+'/'+path)
+  def getSubtemplate(self,path=None):
+    print self.tplpath
+    p=self.tplpath+'/parts'
+    t=template(p)
+    t.tplpath=self.tplpath
+    return t
   
   def getCode(self,code):
     self.code=code
@@ -43,10 +48,11 @@ class template(object):
   def getFile(self,fn):
    try:
     name=self.path+'/'+fn
-    f=open(self.path+'/'+fn)
+    #print "n "+name
+    f=open(name)
     self.code=f.read()
    except IOError:
-     print self.path+'/'+fn
+     print ':[ '+self.path+'/'+fn
      sys.exit('ERROR')
    else:
      self.code

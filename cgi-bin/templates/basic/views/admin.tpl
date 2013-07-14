@@ -1,4 +1,3 @@
 <body>
-{{backend-header}}
-{{partman}}
+{{backend}}
 </body>

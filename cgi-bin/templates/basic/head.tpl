@@ -1,1 +1,1 @@
-<title>{{title}}</title>
+<head><title>{{title}}</title></head>

@@ -1,5 +1,3 @@
-{{heading}}
-{{var}}
 <ul>
 {{iterate=testit as iter}}
  <li>
@@ -11,5 +9,4 @@
  </li>
 {{/iterate}}
 </ul>
-
-
+{{debug}}
