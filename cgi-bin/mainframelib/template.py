@@ -36,7 +36,7 @@ class template(object):
    self.varArray[name]=value
    
   def getSubtemplate(self,path=None):
-    print self.tplpath
+    #print self.tplpath
     p=self.tplpath+'/parts'
     t=template(p)
     t.tplpath=self.tplpath
