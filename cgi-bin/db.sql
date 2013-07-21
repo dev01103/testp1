@@ -34,6 +34,114 @@ CREATE TABLE `pyshop_templates` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `pyshop_templates`
+--
+
+LOCK TABLES `pyshop_templates` WRITE;
+/*!40000 ALTER TABLE `pyshop_templates` DISABLE KEYS */;
+INSERT INTO `pyshop_templates` VALUES (1,'basic','FE',1),(2,'basicBE','BE',0);
+/*!40000 ALTER TABLE `pyshop_templates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pyshop_menu_item_xref`
+--
+
+DROP TABLE IF EXISTS `pyshop_menu_item_xref`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pyshop_menu_item_xref` (
+  `menu_ref_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  PRIMARY KEY (`menu_ref_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pyshop_menu_item_xref`
+--
+
+LOCK TABLES `pyshop_menu_item_xref` WRITE;
+/*!40000 ALTER TABLE `pyshop_menu_item_xref` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pyshop_menu_item_xref` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pyshop_user_group`
+--
+
+DROP TABLE IF EXISTS `pyshop_user_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pyshop_user_group` (
+  `ug_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(45) NOT NULL,
+  `group_id` varchar(45) NOT NULL,
+  PRIMARY KEY (`ug_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pyshop_user_group`
+--
+
+LOCK TABLES `pyshop_user_group` WRITE;
+/*!40000 ALTER TABLE `pyshop_user_group` DISABLE KEYS */;
+INSERT INTO `pyshop_user_group` VALUES (1,'2','0'),(2,'1','1');
+/*!40000 ALTER TABLE `pyshop_user_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pyshop_parts_acl`
+--
+
+DROP TABLE IF EXISTS `pyshop_parts_acl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pyshop_parts_acl` (
+  `acl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `part_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`acl_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pyshop_parts_acl`
+--
+
+LOCK TABLES `pyshop_parts_acl` WRITE;
+/*!40000 ALTER TABLE `pyshop_parts_acl` DISABLE KEYS */;
+INSERT INTO `pyshop_parts_acl` VALUES (1,2,2,0);
+/*!40000 ALTER TABLE `pyshop_parts_acl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pyshop_menus`
+--
+
+DROP TABLE IF EXISTS `pyshop_menus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pyshop_menus` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pyshop_menus`
+--
+
+LOCK TABLES `pyshop_menus` WRITE;
+/*!40000 ALTER TABLE `pyshop_menus` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pyshop_menus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pyshop_parts`
 --
 
@@ -52,35 +160,38 @@ CREATE TABLE `pyshop_parts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `pyshop_user_group`
+-- Dumping data for table `pyshop_parts`
 --
 
-DROP TABLE IF EXISTS `pyshop_user_group`;
+LOCK TABLES `pyshop_parts` WRITE;
+/*!40000 ALTER TABLE `pyshop_parts` DISABLE KEYS */;
+INSERT INTO `pyshop_parts` VALUES (0,'debug','debug','debug',1,0),(1,'frontpage','centerpart','frontpage',1,0),(2,'partman','partman','partman',1,0),(3,'backend_main','backend','backend',1,0);
+/*!40000 ALTER TABLE `pyshop_parts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pyshop_menu_item`
+--
+
+DROP TABLE IF EXISTS `pyshop_menu_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pyshop_user_group` (
-  `ug_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(45) NOT NULL,
-  `group_id` varchar(45) NOT NULL,
-  PRIMARY KEY (`ug_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+CREATE TABLE `pyshop_menu_item` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) NOT NULL,
+  `view` varchar(45) NOT NULL COMMENT '* for all',
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `pyshop_parts_acl`
+-- Dumping data for table `pyshop_menu_item`
 --
 
-DROP TABLE IF EXISTS `pyshop_parts_acl`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pyshop_parts_acl` (
-  `acl_id` int(11) NOT NULL AUTO_INCREMENT,
-  `part_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`acl_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `pyshop_menu_item` WRITE;
+/*!40000 ALTER TABLE `pyshop_menu_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pyshop_menu_item` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `pyshop_users`
@@ -100,6 +211,16 @@ CREATE TABLE `pyshop_users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `pyshop_users`
+--
+
+LOCK TABLES `pyshop_users` WRITE;
+/*!40000 ALTER TABLE `pyshop_users` DISABLE KEYS */;
+INSERT INTO `pyshop_users` VALUES (1,'guest','guest','guest'),(2,'root','root','root');
+/*!40000 ALTER TABLE `pyshop_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pythop_groups`
 --
 
@@ -112,6 +233,16 @@ CREATE TABLE `pythop_groups` (
   PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythop_groups`
+--
+
+LOCK TABLES `pythop_groups` WRITE;
+/*!40000 ALTER TABLE `pythop_groups` DISABLE KEYS */;
+INSERT INTO `pythop_groups` VALUES (1,'Guests'),(2,'Root');
+/*!40000 ALTER TABLE `pythop_groups` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -122,4 +253,4 @@ CREATE TABLE `pythop_groups` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-29 18:53:14
+-- Dump completed on 2013-07-21 17:42:30

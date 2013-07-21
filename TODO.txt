@@ -2,3 +2,4 @@ Solve param-dependant parts (like depending on used view or action)
 More than one part in one position
 Parts occuring more than one time
 Optimize iterated variables in the template. For example mark all iterable in varArray (function for iterated ones).
+Menus

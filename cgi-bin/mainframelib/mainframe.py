@@ -82,7 +82,10 @@ class mainframe:
   def __init__(self):
     mainframe.counter=mainframe.counter+1
     self.templatename=None
+    
+    
    
+  
    
   
    
