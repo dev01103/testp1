@@ -13,6 +13,7 @@ import config
 from mainModel import *
 import sys
 from output import *
+from users_manager import *
 
 
 class mainframe:
