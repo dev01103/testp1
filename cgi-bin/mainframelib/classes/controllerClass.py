@@ -12,7 +12,7 @@ from mainframelib.database import *
 
 
 class controllerClass(object):
-  def setTitle(self,title):
+  def setTitle(self,title): #head  not from template (?), but auto-generated or choice
     self.title=title
   
   def getTitle(self):
