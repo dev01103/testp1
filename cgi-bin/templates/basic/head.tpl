@@ -1,1 +1,1 @@
-<head><title>{{title}}</title></head>
+<head><title>{{title}}</title>{{appended}}</head>

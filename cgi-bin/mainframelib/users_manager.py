@@ -1,9 +1,9 @@
-class users_manager:
+class usersManager:
   me=None  
   @staticmethod
   def getMe():
   	if me==None:
-  		me=users_manager()
+  		me=usersManager()
   	return me
   
   def users_manager(self):

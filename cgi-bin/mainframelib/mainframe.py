@@ -21,6 +21,9 @@ class mainframe:
   counter=0
   #Public functions
   
+  def addTitle(self,title,sep=' - '):
+      self.title=self.title+sep+title
+  
   def addCss(self,css):
     pass
   
@@ -81,6 +84,7 @@ class mainframe:
    
   
   def __init__(self):
+    self.title=''
     mainframe.counter=mainframe.counter+1
     self.templatename=None
     
