@@ -11,10 +11,15 @@ class controller(controllerClass):
   def editParts(self):
     self.tmpl.setVar('partman_content','edit')
   
+  def testAction(self):
+      print "test"
+  
   def defaultAction(self):
-    self.listParts()
+    pass
   
   
   def prepare(self):
     #self.tmpl.hideUnused(True)
+    self.listParts()
+    self.addAction('test',self.testAction)
     self.startAction()

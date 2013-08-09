@@ -2,4 +2,12 @@ Solve param-dependant parts (like depending on used view or action)
 More than one part in one position
 Parts occuring more than one time
 Optimize iterated variables in the template. For example mark all iterable in varArray (function for iterated ones).
+
+
 Menus
+Manage view for some parts maybe
+Get foreign models (perhaps solution for above)
+Layout functionality for templates/parts
+Subparts without database (?)
+
+# Error in a href in templates - partially solved (still some of hrefs goes into positions)

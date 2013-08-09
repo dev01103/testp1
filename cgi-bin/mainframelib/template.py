@@ -48,6 +48,7 @@ class template(object):
   def getFile(self,fn):
    try:
     name=self.path+'/'+fn
+    self.name=name
     #print "n "+name
     f=open(name)
     self.code=f.read()
@@ -59,12 +60,15 @@ class template(object):
      
      
   def getPositions(self):
-    p=re.findall(r'{{.*}}',self.code)
+    cd=self.code
+    #cd=re.sub(r'[{{iterate=.*$','',cd,re.MULTILINE|re.DOTALL)
+    p=re.findall(r'{{.*}}',cd)
+    #print p
     ret=p
     i=0
-    for x in p:
-	ret[i]=re.sub(r'[{{}}]','',x)
-	i=i+1
+    for x in p:  #removing {{}} from names
+	 ret[i]=re.sub(r'[{{}}]','',x)
+	 i=i+1
     return ret
      
   def parseDict(self,code,dic,inside):
@@ -122,9 +126,10 @@ class template(object):
       for it in iterables: 
        parsed=self.parseIter(it,i,self.varArray[i])
        newcode=re.sub(it,parsed,newcode)
-      try:
+     
+     try:
        newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
-      except:
+     except:
        pass
    
    if self.hide==True:

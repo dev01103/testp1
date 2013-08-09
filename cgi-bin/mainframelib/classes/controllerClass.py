@@ -8,18 +8,35 @@ import sys
 import inspect
 from runpy import *
 from mainframelib.database import *
+from mainframelib.serverPath import  *
 
 
 
 class controllerClass(object):
-  def setTitle(self,title): #head  not from template (?), but auto-generated or choice
-    self.title=title
-  
+
   def getTitle(self):
     return self.title
+
+  def setTitle(self,title):
+      self.title=title
+      
+  def addCss(self,fn,dir=None):
+      if dir is None:
+          dir=self.wwwpath
+      code='<link rel="stylesheet" href="'+dir+self.p.S+'css'+self.p.S+fn+'" />\n'
+      self.appendToHead(code)
+  
+  def addJs(self,fn,dir=None):
+      if dir is None:
+          dir=self.wwwpath
+      code='<script src="'+dir+self.p.S+'js'+self.p.S+fn+'"></script>\n'
+      self.appendToHead(code)
   
   def appendToHead(self,code):
-    pass
+    self.appendHead=self.appendHead+code
+
+  def getAppend(self):
+      return self.appendHead
   
   def getAcl(self):
     db=databaseConn.getMe()
@@ -31,7 +48,10 @@ class controllerClass(object):
     
   
   def __init__(self,tmpl,name):
-    self.title='Title'
+    self.p=serverPath.getMe()
+    self.wwwpath=self.p.getWebUrlRoot()
+    self.title=''
+    self.appendHead=''
     self.params=cgi.FieldStorage()
     self.tmpl=tmpl
     self.view=''
@@ -58,6 +78,11 @@ class controllerClass(object):
      (m,v,c)=self.loadPart(p['name'])
      c.setModel(m)
      html=c.proceed()
+     ap=c.getAppend()
+     self.appendToHead(ap)
+     tit=c.getTitle()
+     if tit!='':
+        self.title=self.title+' - '+tit
      body.setVar(p['position'],html)
   
   
@@ -93,6 +118,7 @@ class controllerClass(object):
     
   def startAction(self):
    act=self.getAction()
+   #print act
    if act=='' or act==None:
      act='default'
    self.actions[act]()
@@ -108,6 +134,7 @@ class controllerClass(object):
     positions=self.tmpl.getPositions()
     self.processParts(positions,self.tmpl)
     self.prepare()
+    #s self.tmpl.name
     self.html=self.tmpl.parse()
     return self.html
     

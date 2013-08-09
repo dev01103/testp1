@@ -5,9 +5,18 @@ import config
 import importlib
 import sys
 
+from mainframelib.pdo import *
+
 
 class databaseConn:
  me=None
+ 
+ @staticmethod
+ def getPdo(self):
+     if self.pdo is None:
+         self.pdo=pdo(self.dbo)
+     return self.pdo
+ 
  @staticmethod
  def getMe():
    #global config.global_config
@@ -27,7 +36,7 @@ class databaseConn:
   
  def __init__(self):
   self.res_format=None
-  
+  self.pdo=None
   try:
    self.dbo=importlib.import_module('mainframelib.dbo.'+config.db_type).dbo()
   except:
@@ -53,7 +62,8 @@ class databaseConn:
  def getResults(self): #TODO: optimize for getting results only once
    return self.dbo.getResults()
    
- def q(self,s):
+ def q(self,s): #add proper escaping
+   s=s.replace('"', '\\"')
    return '"'+s+'"'
  
  def qj(self,a):

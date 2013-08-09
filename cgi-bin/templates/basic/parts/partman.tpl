@@ -5,7 +5,7 @@
 </tr>
 {{iterate=parts as part}}
 <tr>
- <td>{{part.part_id}}</td><td>{{part.name}}</td><td>{{part.position}}</td>
+ <td>{{part.part_id}}</td><td><a href="test">{{part.name}}</a></td><td>{{part.position}}</td>
 </tr>
 {{/iterate}}
 

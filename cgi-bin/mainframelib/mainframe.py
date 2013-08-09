@@ -2,6 +2,7 @@
 import cgitb
 import cgi
 import timeit
+import os
 cgitb.enable()
 
 from template import *
@@ -14,22 +15,12 @@ from mainModel import *
 import sys
 from output import *
 from users_manager import *
+from settings import *
+from serverPath import  *
 
 
 class mainframe:
   me=None
-  counter=0
-  #Public functions
-  
-  def addTitle(self,title,sep=' - '):
-      self.title=self.title+sep+title
-  
-  def addCss(self,css):
-    pass
-  
-  def addScript(self,js):
-    pass
-  
   @staticmethod
   def getMe():
    if mainframe.me==None:
@@ -45,6 +36,7 @@ class mainframe:
       return self.templatename
     
   def getAllPartsPos(self,positions):
+      #print positions
       if len(positions)>0 and positions<>None:
        db=databaseConn.getMe()
        query="select * from pyshop_parts where position in ("+db.qj(positions)+") order by ordering"
@@ -68,15 +60,25 @@ class mainframe:
       pass
     db=databaseConn.getMe()
     query="select * from pyshop_users where user_name="+db.q(user);
-    
+   
+  def getMainController(self):
+      return self.controller
+  
+  def setContentType(self,mime):
+      self.content_type=mime
   
   def go(self):
-   print "Content-Type: text/html\n\n"
+   #self.setContentType('text/plain')
+   print "Content-Type: "+self.content_type+"\n\n"
+   p=serverPath.getMe()
+   settings=siteSettings.getMe()
+   title=settings.getVal('main_title')
    o=output.getMe()
    self.model=mainModel()
    tpl=self.getTemplate()
    tmpl=template('templates/'+tpl)
    self.controller=mainController(tmpl,'')
+   self.controller.setTitle(title)
    self.controller.setModel(self.model)
    self.controller.parseRequest()
    self.controller.proceed()
@@ -85,9 +87,8 @@ class mainframe:
   
   def __init__(self):
     self.title=''
-    mainframe.counter=mainframe.counter+1
     self.templatename=None
-    
+    self.content_type='text/html'
     
    
   

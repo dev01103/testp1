@@ -2,7 +2,13 @@ from mainframelib.classes.controllerClass import *
 from mainframelib.mainframe import *
 
 class controller(controllerClass):
+  def defaultAction(self):
+      pass
+      
+  
   def prepare(self):
-    self.mf=mainframe.getMe()
-    self.db=databaseConn.getMe()
-    self.tmpl.setVar('counter',str(mainframe.counter))
+      parts=self.model.getAllParts()
+      self.tmpl.setVar('testparts',parts[0]['name'])
+      self.tmpl.setVar('ps',parts)
+      self.startAction()
+    

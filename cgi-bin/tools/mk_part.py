@@ -29,7 +29,7 @@ def makeFiles(name):
   
 def insertDB(name):
   db=databaseConn.getMe()
-  
+  #db.query('insert into pyshop_parts (name,position)')
 
 print "Pyshop part making utility"
 

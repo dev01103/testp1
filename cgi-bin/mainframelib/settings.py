@@ -4,12 +4,13 @@ class siteSettings:
     me=None
     @staticmethod
     def getMe():
-        if me==None:
-            me=siteSettings()
-        return me
+        if siteSettings.me==None:
+            siteSettings.me=siteSettings()
+        return siteSettings.me
     def getVal(self,key):
         db=databaseConn.getMe()
-        query="select distinct key,val from pyshop_settings where key="+db.q(key)
+        query="select val from pyshop_settings where pyshop_settings.key="+db.q(key)
+        #print query
         db.query(query)
         res=db.getResults()
-        return res[0];
+        return res[0]['val'];
