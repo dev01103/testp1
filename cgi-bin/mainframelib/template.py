@@ -3,7 +3,7 @@ import sys
 import copy
 
 from serverPath import *
-
+from requestMaker import *
 
 class template(object):
   def __init__(self,path):
@@ -108,18 +108,7 @@ class template(object):
       html=html+t.parse() 
     return html
     
-  def mkRequest(self,dict,slf): #maybe move it somewere else
-    if slf:
-        sp=serverPath.getMe()
-        print sp.getUrlRoot()+"<br />" 
-        req=sp.getWebUrlRoot()
-    else:
-        req=""
-    
-    for k in dict:
-        v=dict[k]
-        req=req+k+'='+v+"&amp;"
-    return req
+  
     
   def parseLink(self,link): 
           isself=re.findall(r'SELF',link);
@@ -160,9 +149,10 @@ class template(object):
    hrefregex=r'{{link.*}}'
    links=re.findall(hrefregex,newcode,re.MULTILINE)
    if links<>None:
+    req=requestMaker.getMe()
     for link in links:   
      d,slf=self.parseLink(link)
-     newcode=re.sub(hrefregex,self.mkRequest(d,slf),newcode)
+     newcode=re.sub(hrefregex,req.mkRequest(d,slf),newcode)
    if self.hide==True:
      newcode=re.sub(r'{{.*}}','',newcode)
    return newcode

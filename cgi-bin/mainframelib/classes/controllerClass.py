@@ -9,7 +9,7 @@ import inspect
 from runpy import *
 from mainframelib.database import *
 from mainframelib.serverPath import  *
-
+from mainframelib.requestMaker import *
 
 
 class controllerClass(object):
@@ -48,11 +48,11 @@ class controllerClass(object):
     
   
   def __init__(self,tmpl,name):
+    self.req=requestMaker.getMe()
     self.p=serverPath.getMe()
     self.wwwpath=self.p.getWebUrlRoot()
     self.title=''
     self.appendHead=''
-    self.params=cgi.FieldStorage()
     self.tmpl=tmpl
     self.view=''
     self.name=name
@@ -69,7 +69,7 @@ class controllerClass(object):
   def loadPart(self,name):
      part_model=importlib.import_module('parts.'+name+'.model').model()
      part_template=self.tmpl.getSubtemplate()
-     lay=self.params.getvalue(name+'_layout','')
+     lay=self.req.getReq(name+'_layout','')
      if lay<>"":
          lay="."+lay
      print lay
@@ -97,23 +97,15 @@ class controllerClass(object):
   def setModel(self,m):
     self.model=m
   
-  def getReq(self,name,default=None):
-    v=self.params.getvalue(name)
-    if v==None:
-      return default
-    else:
-      return v
+  
   
   def parseRequest(self):
-   if self.params.getvalue('view')<>None:
-      self.view=self.params.getvalue('view')
-   else:
-       self.view='main'
+   self.view=self.req.getReq('view','main')
    if self.name<>'':
      name=self.name+'_'
    else:
      name=''
-   self.action=self.getReq(name+'action')
+   self.action=self.req.getReq(name+'action')
   
   def getAction(self):
     return self.action
