@@ -10,4 +10,5 @@ test
  </li>
 {{/iterate}}
 </ul>
-{{debug}}
+<a href="?{{link view="admin}}">Backend</a>
+

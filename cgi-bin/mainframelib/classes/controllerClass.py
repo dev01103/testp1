@@ -61,11 +61,19 @@ class controllerClass(object):
     self.actions={}
     self.addAction('default',self.defaultAction)
     
+  def linkLay(self,layout): #temporary
+    lay=name+"_layout="+layout    
+    return lay
+  
     
   def loadPart(self,name):
      part_model=importlib.import_module('parts.'+name+'.model').model()
      part_template=self.tmpl.getSubtemplate()
-     part_template.getFile(name+'.tpl')
+     lay=self.params.getvalue(name+'_layout','')
+     if lay<>"":
+         lay="."+lay
+     print lay
+     part_template.getFile(name+lay+'.tpl')
      part_controller=importlib.import_module('parts.'+name+'.controller').controller(part_template,name)
      self.allowed_children=self.allowed_children & part_controller.isAllowed()
      return (part_model,part_template,part_controller)
@@ -118,7 +126,6 @@ class controllerClass(object):
     
   def startAction(self):
    act=self.getAction()
-   #print act
    if act=='' or act==None:
      act='default'
    self.actions[act]()
@@ -134,7 +141,6 @@ class controllerClass(object):
     positions=self.tmpl.getPositions()
     self.processParts(positions,self.tmpl)
     self.prepare()
-    #s self.tmpl.name
     self.html=self.tmpl.parse()
     return self.html
     

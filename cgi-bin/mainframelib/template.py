@@ -80,8 +80,6 @@ class template(object):
     t.code=code
     for k in dic:
       t.setVar(inside+'.'+k,str(dic[k]))
-      
-      
     t.code=t.parse()  
     return (key,t.code)
     
@@ -94,7 +92,6 @@ class template(object):
     itas=itas.group(0)
     itas=re.sub(r'as ','',itas)
     itas=re.sub(r'}}','',itas)
-    
     insides=re.sub(r'^{{iterate=.*}}','',code)
     insides=re.sub(r'{{/iterate.*}}$','',insides)
     #print insides
@@ -107,18 +104,39 @@ class template(object):
        t.code=v
       else:
        t.setVar(itas,v)
-      
       html=html+t.parse() 
-      
-      
-    
     return html
     
+  def mkRequest(self,dict): #maybe move it somewere else
+    req=""
+    for k in dict:
+        v=dict[k]
+        req=req+k+'='+v+"&amp;"
+    return req
     
+  def parseLink(self,link): 
+          datastr=re.findall(r' .*=.*',link)[0]
+          datastr=re.sub(r'}}','',datastr)
+          data=datastr.rsplit(' ')
+          data_dict={}
+          for d in data:
+              vals=d.rsplit('=')
+              #print vals
+              if len(vals)==2:
+                  data_dict[vals[0]]=vals[1].replace('\"','')
+          return data_dict
+          
     
   
   def parse(self):
-   newcode=self.code
+   hrefregex=r'{{link.*}}'
+   links=re.findall(hrefregex,self.code,re.MULTILINE)
+   if links<>None:
+    for link in links:   
+     d=self.parseLink(link)
+     self.code=re.sub(hrefregex,self.mkRequest(d),self.code)
+   
+   newcode=self.code  
    for i in self.varArray:
      regex=r'{{iterate='+i+' as.*}}.*{{/iterate}}'
      iterables=re.findall(regex,self.code,re.MULTILINE|re.DOTALL)
