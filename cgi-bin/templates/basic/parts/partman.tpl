@@ -4,7 +4,7 @@
 </tr>
 {{iterate=parts as part}}
 <tr>
- <td>{{part.part_id}}</td><td><a href="&test">{{part.name}}</a></td><td>{{part.position}}</td>
+ <td>{{part.part_id}}</td><td><a href="{{link partman_layout="edit" pid="{{part.part_id}}" SELF}}">{{part.name}}</a></td><td>{{part.position}}</td>
 </tr>
 {{/iterate}}
 

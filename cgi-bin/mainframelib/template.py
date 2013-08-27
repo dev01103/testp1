@@ -2,6 +2,7 @@ import re
 import sys
 import copy
 
+from serverPath import *
 
 
 class template(object):
@@ -107,14 +108,26 @@ class template(object):
       html=html+t.parse() 
     return html
     
-  def mkRequest(self,dict): #maybe move it somewere else
-    req=""
+  def mkRequest(self,dict,slf): #maybe move it somewere else
+    if slf:
+        sp=serverPath.getMe()
+        print sp.getUrlRoot()+"<br />" 
+        req=sp.getWebUrlRoot()
+    else:
+        req=""
+    
     for k in dict:
         v=dict[k]
         req=req+k+'='+v+"&amp;"
     return req
     
   def parseLink(self,link): 
+          isself=re.findall(r'SELF',link);
+          if isself:
+              isself=True
+          else:
+              isself=False
+          
           datastr=re.findall(r' .*=.*',link)[0]
           datastr=re.sub(r'}}','',datastr)
           data=datastr.rsplit(' ')
@@ -124,17 +137,12 @@ class template(object):
               #print vals
               if len(vals)==2:
                   data_dict[vals[0]]=vals[1].replace('\"','')
-          return data_dict
+          return (data_dict,isself)
           
     
   
   def parse(self):
-   hrefregex=r'{{link.*}}'
-   links=re.findall(hrefregex,self.code,re.MULTILINE)
-   if links<>None:
-    for link in links:   
-     d=self.parseLink(link)
-     self.code=re.sub(hrefregex,self.mkRequest(d),self.code)
+   
    
    newcode=self.code  
    for i in self.varArray:
@@ -149,7 +157,12 @@ class template(object):
        newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
      except:
        pass
-   
+   hrefregex=r'{{link.*}}'
+   links=re.findall(hrefregex,newcode,re.MULTILINE)
+   if links<>None:
+    for link in links:   
+     d,slf=self.parseLink(link)
+     newcode=re.sub(hrefregex,self.mkRequest(d,slf),newcode)
    if self.hide==True:
      newcode=re.sub(r'{{.*}}','',newcode)
    return newcode
