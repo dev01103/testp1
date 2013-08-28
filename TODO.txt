@@ -18,10 +18,8 @@ Loading parts with layout selection in {{}}
 Including other tpl
 getting all vars from controller by {{var="self.test"}} or something
 Add database instance to all models for convinience
-Error in {{link...}} parsing in iterable expressions.
-
-Adding other tmpl variables to {{link...}} expression. For example {{link view="admin" mid=id}}. 
-Variables distinguished by lack of quotes.
 
 
-# Error in a href in templates - partially solved (still some of hrefs goes into positions)
+Bond layout variable with action or make action invoke layout
+
+

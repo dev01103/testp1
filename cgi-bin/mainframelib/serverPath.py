@@ -1,6 +1,7 @@
 import os
 import re
 
+
 import config
 
 
@@ -17,6 +18,8 @@ class serverPath:
   
   def prepServerData(self):
       self.env=os.environ
+      self.index=os.path.basename(os.environ['SCRIPT_NAME'])
+      self.get_query=os.environ['QUERY_STRING']
       self.fsroot_raw=__file__
       self.fsroot=self.fsroot_raw #later on
       self.url_root=''
@@ -29,10 +32,15 @@ class serverPath:
           self.url_root=url
       
   
+  def getUri(self):
+      
+      return self.url_root+self.index+'?'+self.get_query
+  
   def getWebUrlRoot(self):
       return self.getUrlRoot()+config.web_root
   
   def getUrlRoot(self):
+      #print os.environ['SCRIPT_NAME'] + ' and '+ os.environ['QUERY_STRING']
       return self.url_root
   
   def getUrlCgiRoot(self):

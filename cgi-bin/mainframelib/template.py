@@ -141,11 +141,17 @@ class template(object):
       for it in iterables: 
        parsed=self.parseIter(it,i,self.varArray[i])
        newcode=re.sub(it,parsed,newcode)
-     
+     #else:
+     regex=r'{{.*\..*}}'
+     dicts=re.findall(regex,self.code,re.DOTALL)
+      
      try:
        newcode=re.sub(r'{{'+i+'}}',self.varArray[i],newcode)
      except:
        pass
+       
+       #newcode=self.parseDict(newcode, self.varArray[i], "{{"+i+"}}")
+       
    hrefregex=r'{{link.*}}'
    links=re.findall(hrefregex,newcode,re.MULTILINE)
    if links<>None:

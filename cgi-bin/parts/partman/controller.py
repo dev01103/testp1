@@ -17,9 +17,17 @@ class controller(controllerClass):
   def defaultAction(self):
     pass
   
+  def editAction(self):
+      pid=self.req.getReq('pid');
+      part=self.model.getPart(pid)
+      print part
+      self.tmpl.setVar('part',part)  
+      pass
   
   def prepare(self):
     #self.tmpl.hideUnused(True)
+    
     self.listParts()
     self.addAction('test',self.testAction)
+    self.addAction('edit',self.editAction)
     self.startAction()
