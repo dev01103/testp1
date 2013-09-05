@@ -118,9 +118,11 @@ class controllerClass(object):
     
   def startAction(self):
    act=self.getAction()
-   if act=='' or act==None:
+   if act=='' or act==None or act not in self.actions.keys():
      act='default'
    self.actions[act]()
+   
+       
    
   
   def prepare(self): #custom preparations done in parts

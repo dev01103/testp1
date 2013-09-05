@@ -17,6 +17,9 @@ class controller(controllerClass):
   def defaultAction(self):
     pass
   
+  def saveAction(self):
+      self.editAction()
+  
   def editAction(self):
       pid=self.req.getReq('pid');
       part=self.model.getPart(pid)      
@@ -34,4 +37,5 @@ class controller(controllerClass):
     self.listParts()
     self.addAction('test',self.testAction)
     self.addAction('edit',self.editAction)
+    self.addAction('save',self.saveAction)
     self.startAction()

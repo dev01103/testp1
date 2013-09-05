@@ -20,7 +20,12 @@ getting all vars from controller by {{var="self.test"}} or something
 Add database instance to all models for convinience
 
 
-Top-priority: Built-in {{keywords}} in templates. Like {{SELF}} for current page. 
-Bond layout variable with action or make action invoke layout
+Top-priority: 
+SELF in links get wrong url on second use
+Variables in links should replace ones in SELF 
+Bond layout variable with action or |make action invoke layout| <--- that one 
+Built-in {{keywords}} in templates. Like {{SELF}} for current page.
+
+
 
 
