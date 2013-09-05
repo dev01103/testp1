@@ -19,9 +19,13 @@ class controller(controllerClass):
   
   def editAction(self):
       pid=self.req.getReq('pid');
-      part=self.model.getPart(pid)
-      print part
+      part=self.model.getPart(pid)      
       self.tmpl.setVar('part',part)  
+      if part['published']:
+          pub="checked"
+      else:
+          pub=""
+      self.tmpl.setVar('published',pub)
       pass
   
   def prepare(self):

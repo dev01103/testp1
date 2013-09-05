@@ -11,7 +11,7 @@ Get foreign models (perhaps solution for above)
 # Layout functionality for templates/parts
 Subparts without database (?)
 
-Built-in {{keywords}} in templates. Like {{SELF}} for current page. 
+
 # Some mechanism for links {{link view=admin layout=test}} 
 {{PYTHON}}code{{/PYTHON}} acting similar to <?php ?> in PHP
 Loading parts with layout selection in {{}}
@@ -20,6 +20,7 @@ getting all vars from controller by {{var="self.test"}} or something
 Add database instance to all models for convinience
 
 
+Top-priority: Built-in {{keywords}} in templates. Like {{SELF}} for current page. 
 Bond layout variable with action or make action invoke layout
 
 

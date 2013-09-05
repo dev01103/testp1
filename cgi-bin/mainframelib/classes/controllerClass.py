@@ -72,7 +72,7 @@ class controllerClass(object):
      lay=self.req.getReq(name+'_layout','')
      if lay<>"":
          lay="."+lay
-     print lay
+     #print lay
      part_template.getFile(name+lay+'.tpl')
      part_controller=importlib.import_module('parts.'+name+'.controller').controller(part_template,name)
      self.allowed_children=self.allowed_children & part_controller.isAllowed()

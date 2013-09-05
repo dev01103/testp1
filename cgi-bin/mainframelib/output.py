@@ -18,7 +18,7 @@ class output:
     self.lockPrint()
   
   def lockPrint(self):
-   # sys.stdout=self.block
+   #sys.stdout=self.block
    pass
   def unlockPrint(self):
     sys.stdout=self.out
