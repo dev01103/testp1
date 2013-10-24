@@ -40,7 +40,7 @@ class databaseConn:
   try:
    self.dbo=importlib.import_module('mainframelib.dbo.'+config.db_type).dbo()
   except:
-   print "No such dbo!"
+   #print "No such dbo!"
    sys.exit()
   else:
     self.connected=False
