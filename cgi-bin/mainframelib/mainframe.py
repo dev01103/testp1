@@ -1,9 +1,6 @@
-#!/usr/bin/env python
-import cgitb
-import cgi
 import timeit
 import os
-cgitb.enable()
+
 
 from template import *
 from mainController import *

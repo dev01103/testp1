@@ -17,8 +17,7 @@ class serverPath:
    return serverPath.me
   
   def prepServerData(self):
-      self.env=os.environ
-      self.index=os.path.basename(os.environ['SCRIPT_NAME'])
+      """self.env=os.environ
       self.get_query=os.environ['QUERY_STRING']
       self.fsroot_raw=__file__
       self.fsroot=self.fsroot_raw #later on
@@ -30,6 +29,7 @@ class serverPath:
           wd=re.sub(r'/cgi-bin/.*',r'',wd)
           url='http://'+self.env['HTTP_HOST']+wd+'/' # just a temporary workaround
           self.url_root=url
+      """
       
   
   def getUri(self):
@@ -47,4 +47,4 @@ class serverPath:
       return self.getUrlRoot()+'cgi-bin'
   
   def __init__(self):
-      self.prepServerData()
+      # self.prepServerData()

@@ -11,11 +11,20 @@ class output:
    if output.me==None:
      output.me=output()
    return output.me
-  
+   
   def __init__(self):
-    self.out=sys.stdout
-    self.block=outputBlocker()
-    self.lockPrint()
+   	self.ct="text/plain" 
+   	self.buffer=""
+   	self.s='200 OK'
+  
+  def contentType(self,ct):
+  	self.ct=ct
+  	
+  def status(self,code):
+  	self.s=code
+  	
+  def o(self,c)
+    self.buffer=self.buffer+c	
   
   def lockPrint(self):
    #sys.stdout=self.block
@@ -23,9 +32,11 @@ class output:
   def unlockPrint(self):
     sys.stdout=self.out
   def o(self,todo):
-    self.unlockPrint()
-    print(todo)
-    self.lockPrint()
+  	self.buffer=self.buffer+todo
+  	def getBuffer(self):
+		return self.buffer  
+  
+  
   def code(self,delimiters):
    pass  
   #def html(self):

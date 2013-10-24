@@ -54,7 +54,7 @@ class template(object):
     f = open(name)
     self.code = f.read()
    except IOError:
-     print ':[ ' + self.path + '/' + fn
+     # print ':[ ' + self.path + '/' + fn
      sys.exit('ERROR')
    else:
      self.code
@@ -106,7 +106,7 @@ class template(object):
     itas = itas.group(0)
     itas = re.sub(r'as ', '', itas)
     itas = re.sub(r'}}', '', itas)
-    print itas
+    #print itas
     insides = re.sub(r'^{{iterate=.*}}', '', code)
     insides = re.sub(r'{{/iterate.*}}$', '', insides)
     html = ''
