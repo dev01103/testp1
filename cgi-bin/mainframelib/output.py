@@ -23,7 +23,7 @@ class output:
   def status(self,code):
   	self.s=code
   	
-  def o(self,c)
+  def o(self,c):
     self.buffer=self.buffer+c	
   
   def lockPrint(self):

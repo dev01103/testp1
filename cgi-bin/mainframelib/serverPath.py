@@ -30,6 +30,7 @@ class serverPath:
           url='http://'+self.env['HTTP_HOST']+wd+'/' # just a temporary workaround
           self.url_root=url
       """
+      pass
       
   
   def getUri(self):
@@ -47,4 +48,5 @@ class serverPath:
       return self.getUrlRoot()+'cgi-bin'
   
   def __init__(self):
-      # self.prepServerData()
+      self.prepServerData()
+      
