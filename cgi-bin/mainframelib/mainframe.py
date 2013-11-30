@@ -70,6 +70,7 @@ class mainframe:
    p=serverPath.getMe()
    settings=siteSettings.getMe()
    title=settings.getVal('main_title')
+   #title="title"
    o=output.getMe()
    self.model=mainModel()
    tpl=self.getTemplate()

@@ -17,12 +17,13 @@ class serverPath:
    return serverPath.me
   
   def prepServerData(self):
-      """self.env=os.environ
-      self.get_query=os.environ['QUERY_STRING']
+      self.env=os.environ
+      #self.get_query=os.environ['QUERY_STRING']
+      self.get_query=''
       self.fsroot_raw=__file__
       self.fsroot=self.fsroot_raw #later on
       self.url_root=''
-      if self.env.has_key('HTTP_REFERER'):
+      """"if self.env.has_key('HTTP_REFERER'):
        self.url_root=self.env['HTTP_REFERER']
       else:
           wd=self.env['REQUEST_URI']

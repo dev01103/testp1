@@ -51,11 +51,12 @@ class template(object):
     name = self.path + '/' + fn
     self.name = name
     # print "n "+name
-    f = open(name)
+    f = open( os.path.dirname(__file__) + "/../"+name)
     self.code = f.read()
    except IOError:
-     # print ':[ ' + self.path + '/' + fn
-     sys.exit('ERROR')
+     #print name
+     #print ':[ ' + self.path + '/' + fn
+     sys.exit('ERROR '+ self.path + '/' + fn)
    else:
      self.code
      

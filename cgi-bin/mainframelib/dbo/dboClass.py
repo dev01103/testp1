@@ -1,4 +1,4 @@
-import MySQLdb as mdb
+
 
 class dboClass:
   def __init__(self):

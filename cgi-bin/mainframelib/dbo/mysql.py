@@ -1,4 +1,6 @@
+
 from dboClass import *
+import MySQLdb as mdb
 
 class dbo(dboClass):
   def connect(self,host,user,psw,db):

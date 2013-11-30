@@ -1,4 +1,5 @@
 import sys
+import os
 
 class outputBlocker:
   def write(self,arg):
@@ -16,6 +17,8 @@ class output:
    	self.ct="text/plain" 
    	self.buffer=""
    	self.s='200 OK'
+   	
+   	
   
   def contentType(self,ct):
   	self.ct=ct

@@ -37,10 +37,12 @@ class databaseConn:
  def __init__(self):
   self.res_format=None
   self.pdo=None
+  print config.db_type
+  #print "test"
   try:
    self.dbo=importlib.import_module('mainframelib.dbo.'+config.db_type).dbo()
   except:
-   #print "No such dbo!"
+   print "No such dbo!"
    sys.exit()
   else:
     self.connected=False
