@@ -26,8 +26,7 @@ class output:
   def status(self,code):
   	self.s=code
   	
-  def o(self,c):
-    self.buffer=self.buffer+c	
+  
   
   def lockPrint(self):
    #sys.stdout=self.block
@@ -35,8 +34,9 @@ class output:
   def unlockPrint(self):
     sys.stdout=self.out
   def o(self,todo):
-  	self.buffer=self.buffer+todo
-  	def getBuffer(self):
+  	self.buffer=todo
+  	
+  def getBuffer(self):
 		return self.buffer  
   
   

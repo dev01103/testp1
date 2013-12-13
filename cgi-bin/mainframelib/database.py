@@ -27,7 +27,8 @@ class databaseConn:
    return databaseConn.me
 
  def connect(self):
-  self.dbo.connect(config.db_addr,config.db_user,config.db_pass,config.db_name)
+  self.dbo.setDbData(config.db_addr,config.db_user,config.db_pass,config.db_name)
+  self.dbo.connect()
   self.connected=True
   
  def disconnect(self):
